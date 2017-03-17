@@ -1,0 +1,453 @@
+object ProductionListForm: TProductionListForm
+  Left = 241
+  Top = 191
+  Width = 843
+  Height = 486
+  Caption = #22383#24067#23567#26679#21518#25972#29702#24037#24207#36335#24452#32500#25252
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnl2: TPanel
+    Left = 193
+    Top = 0
+    Width = 642
+    Height = 459
+    Align = alClient
+    Caption = 'pnl2'
+    TabOrder = 0
+    object pnlBottom: TPanel
+      Left = 1
+      Top = 423
+      Width = 640
+      Height = 35
+      Align = alBottom
+      BevelOuter = bvNone
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object pnlButton: TPanel
+        Left = 64
+        Top = 0
+        Width = 576
+        Height = 35
+        Align = alRight
+        BevelOuter = bvNone
+        TabOrder = 0
+        DesignSize = (
+          576
+          35)
+        object btnAdd: TSpeedButton
+          Left = 12
+          Top = 5
+          Width = 87
+          Height = 27
+          Anchors = [akRight, akBottom]
+          Caption = #26032#22686
+          Flat = True
+          Glyph.Data = {
+            66010000424D6601000000000000760000002800000015000000140000000100
+            040000000000F0000000130B0000130B00001000000000000000000000000000
+            8000008000000080800080000000800080008080000080808000C0C0C0000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+            FFFFFFFFF000FFFFFFFFFFFFFFFFFFFFF000FFFFFFFFFFFFFFFFFFFFF000FFFF
+            FFFFFFFFFFFFFFFFF000FFFFF00000000000FFFFF000FFFFF0FFFFFFFFF0FFFF
+            F000FFFFF0FFFFFFFFF0FFFFF000FFFFF0FFFFFFFFF0FFFFF000FFFFF0FFFFFF
+            FFF0FFFFF000FFFFF0FFFFFFFFF0FFFFF000FFFFF0FFFFFFFFF0FFFFF000FFFF
+            F0FFFFFFFFF0FFFFF000FFFFF0FFFFFFFFF0FFFFF000FFFFF0FFFFFF0000FFFF
+            F000FFFFF0FFFFFF0F0FFFFFF000FFFFF0FFFFFF00FFFFFFF000FFFFF0000000
+            0FFFFFFFF000FFFFFFFFFFFFFFFFFFFFF000FFFFFFFFFFFFFFFFFFFFF000FFFF
+            FFFFFFFFFFFFFFFFF000}
+          OnClick = btnAddClick
+        end
+        object btnDelete: TSpeedButton
+          Left = 198
+          Top = 5
+          Width = 87
+          Height = 27
+          Anchors = [akRight, akBottom]
+          Caption = #21024#38500
+          Flat = True
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00
+            FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0000000000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00
+            FF00FF00FF000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00FF00FF00
+            FF000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF000000000000000000000000000000
+            000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000000000000000
+            0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF000000000000000000000000000000
+            000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00000000000000000000000000FF00FF00FF00
+            FF000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF0000000000000000000000000000000000FF00FF00FF00FF00FF00
+            FF00FF00FF000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0000000000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          OnClick = btnDeleteClick
+        end
+        object btnSave: TSpeedButton
+          Left = 298
+          Top = 5
+          Width = 87
+          Height = 27
+          Anchors = [akRight, akBottom]
+          Caption = #20445#23384
+          Flat = True
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF000000000000000000000000000000000000000000000000
+            0000C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF000000000000000000000000000000000000000000000000
+            0000C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF000000000000000000000000000000000000000000000000
+            0000C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF000000000000000000000000000000000000000000000000
+            0000000000000000000000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF
+            0000FFFF0000FFFF0000FFFF0000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF0000FFFF000000000000000000000000000000000000000000000000
+            00000000000000000000FFFF0000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C60000000000FFFF000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C600000000000000000000000000FF00FF00FF00FF000000
+            0000FFFF000000000000C6C6C600C6C6C600C6C6C600C6C6C600C6C6C600C6C6
+            C600C6C6C600C6C6C60000000000FF00FF0000000000FF00FF00FF00FF000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          OnClick = btnSaveClick
+        end
+        object btnClose: TSpeedButton
+          Left = 484
+          Top = 5
+          Width = 86
+          Height = 27
+          Anchors = [akRight, akBottom]
+          Caption = #36864#20986
+          Flat = True
+          Glyph.Data = {
+            42020000424D4202000000000000420000002800000010000000100000000100
+            1000030000000002000000000000000000000000000000000000007C0000E003
+            00001F0000001F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C1F7C1F7C1F7C000000001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C1F7C1F7C0000004200001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C1F7C00000042004200001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C0000000000420042004200000000000000000000000000000000
+            1F7C1F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C000000420042000000001F7C1F7C00001F7C1F7C1F7C1F7C
+            10001F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C1F7C1000
+            10001F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C10001000
+            1000100010001F7C000000420042004200001F7C1F7C00001F7C100010001000
+            1000100010001F7C000000420042004200001F7C1F7C00001F7C1F7C10001000
+            1000100010001F7C00000042004200001F7C1F7C1F7C00001F7C1F7C1F7C1000
+            10001F7C1F7C1F7C0000004200001F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C
+            10001F7C1F7C1F7C000000001F7C1F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C1F7C000000000000000000000000000000001F7C1F7C1F7C1F7C
+            1F7C1F7C1F7C}
+          OnClick = btnExitClick
+        end
+        object btnUpdate: TSpeedButton
+          Left = 111
+          Top = 6
+          Width = 75
+          Height = 25
+          Anchors = [akRight, akBottom]
+          Caption = #20462#25913
+          Flat = True
+          Glyph.Data = {
+            66010000424D6601000000000000760000002800000014000000140000000100
+            040000000000F0000000130B0000130B00001000000000000000000000000000
+            8000008000000080800080000000800080008080000080808000C0C0C0000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+            FFFFFFFFC0C0FFFFFFFFFFFFFFFFFFFFC0C0FFFFFFFFFFFFFFFFFFFFC0C0FFFF
+            F0F0F0F0FFFFFFFFC0C0FFFFFFFFFFF00FFFFFFFC0C0FFFFFFFFFFF000FFFFFF
+            C0C0FFF000000000B70FFFFFC0C0FFF0FFFFFFF0B80FFFFFC0C0FFF0F00F00F0
+            0B70FFFFC0C0FFF0FFFFFFFF0B80FFFFC0C0FFF0CCCCCCCCC0B70FFFC0C0FFFF
+            CFFFFFFFF0B00FFFC0C0FFFFCF00F00F000110FFC0C0FFFFCFFFFFFFFF000FFF
+            C0C0FFFFCCCCCCCCCCCCFFFFC0C0FFFFC8CC8CC8CC8CFFFFC0C0FFFFCCCCCCCC
+            CCCCFFFFC0C0FFFFFFFFFFFFFFFFFFFFC0C0FFFFFFFFFFFFFFFFFFFFC0C0FFFF
+            FFFFFFFFFFFFFFFFC0C0}
+          OnClick = btnUpdateClick
+        end
+        object btnCancel: TSpeedButton
+          Left = 397
+          Top = 5
+          Width = 75
+          Height = 27
+          Anchors = [akRight, akBottom]
+          Caption = #21462#28040
+          Flat = True
+          OnClick = btnCancelClick
+        end
+      end
+    end
+    object pnlEdit: TPanel
+      Left = 1
+      Top = 1
+      Width = 640
+      Height = 88
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      object lbl1: TLabel
+        Left = 16
+        Top = 20
+        Width = 66
+        Height = 12
+        Caption = #21518#25972#24037#24207': '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl2: TLabel
+        Left = 16
+        Top = 52
+        Width = 66
+        Height = 12
+        Caption = #21152#24037#26102#38388': '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl3: TLabel
+        Left = 264
+        Top = 51
+        Width = 59
+        Height = 12
+        Caption = #24037#24207#20195#21495':'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl4: TLabel
+        Left = 208
+        Top = 51
+        Width = 26
+        Height = 12
+        Caption = #23567#26102
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edtProName: TEdit
+        Left = 80
+        Top = 16
+        Width = 497
+        Height = 20
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        Text = 'edtProName'
+      end
+      object edtProCT: TEdit
+        Left = 80
+        Top = 48
+        Width = 121
+        Height = 20
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        Text = 'edtProCT'
+        OnKeyPress = edtProCTKeyPress
+      end
+      object edtProCode: TEdit
+        Left = 328
+        Top = 48
+        Width = 249
+        Height = 21
+        Color = clScrollBar
+        ReadOnly = True
+        TabOrder = 2
+        Text = 'edtProCode'
+      end
+    end
+    object dbgrdPL: TDBGrid
+      Left = 1
+      Top = 89
+      Width = 640
+      Height = 334
+      Align = alClient
+      DataSource = dsfnProductionList
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnCellClick = dbgrdPLCellClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Iden'
+          Title.Caption = #24037#24207#21495
+          Width = 46
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Name'
+          Title.Caption = #21518#25972#24037#24207
+          Width = 185
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Code'
+          Title.Caption = #24037#24207#20195#21495
+          Width = 130
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CT'
+          Title.Caption = #21152#24037#26102#38388'('#23567#26102')'
+          Width = 87
+          Visible = True
+        end>
+    end
+  end
+  object cxSplitter1: TcxSplitter
+    Left = 185
+    Top = 0
+    Width = 8
+    Height = 459
+    HotZoneClassName = 'TcxMediaPlayer8Style'
+    Control = pnl1
+  end
+  object pnl1: TPanel
+    Left = 0
+    Top = 0
+    Width = 185
+    Height = 459
+    Align = alLeft
+    Caption = 'pnl1'
+    TabOrder = 2
+    object grp1: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 183
+      Height = 457
+      Align = alClient
+      Caption = #21487#36873#24037#24207
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object chklstOperationHdr: TCheckListBox
+        Left = 2
+        Top = 14
+        Width = 179
+        Height = 441
+        OnClickCheck = chklstOperationHdrClickCheck
+        Align = alClient
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = #23435#20307
+        Font.Style = [fsBold]
+        ItemHeight = 16
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+  end
+  object cdsProPar: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 128
+    Top = 320
+  end
+  object cdsfnProductionList: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterScroll = cdsfnProductionListAfterScroll
+    Left = 296
+    Top = 312
+  end
+  object dsfnProductionList: TDataSource
+    DataSet = cdsfnProductionList
+    Left = 336
+    Top = 312
+  end
+  object cdsCheckUnique: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 296
+    Top = 344
+  end
+end

@@ -1,0 +1,319 @@
+unit frmOperationAddr;
+{******************************************************************************}
+{                                                                              }
+{       软件名称 FNM CLIENT MODEL                                              }
+{       版权所有 (C) 2004-2005 ESQUEL GROUP GET/IT                             }
+{       单元名称 frmOperationAddr.pas                                          }
+{       创建日期 2004-8-26 13:50:57                                            }
+{       创建人员 Lvzd                                                          }
+{       修改人员                                                               }
+{       修改日期                                                               }
+{       修改原因                                                               }
+{       对应用例                                                               }
+{       字段描述                                                               }
+{       相关数据库表                                                           }
+{       调用重要函数/SQL对象说明                                               }
+{       功能描述  加工地点维护                                                 }
+{                                                                              }
+{******************************************************************************}
+
+interface
+
+uses
+  uFNMArtInfo, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, ValEdit, ComCtrls, cxControls, cxContainer, cxEdit,
+  cxTextEdit, cxMaskEdit, cxButtonEdit, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TOperationAddrForm = class(TForm)
+    pnl_Only: TPanel;
+    btn_OpenFactArt: TSpeedButton;
+    pnl_Only2: TPanel;
+    txt_Only: TStaticText;
+    vle_Operation_Parlist: TValueListEditor;
+    tv_CardList: TTreeView;
+    cxbe_GFKeyValue: TcxButtonEdit;
+    pnl1: TPanel;
+    btn3: TButton;
+    btn_SaveArt: TButton;
+    btn_OK: TButton;
+    procedure cxbe_GFKeyValuePropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_OpenFactArtClick(Sender: TObject);
+    procedure vle_Operation_ParlistKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure vle_Operation_ParlistValidate(Sender: TObject; ACol,
+      ARow: Integer; const KeyName, KeyValue: String);
+    procedure KeyDownAControl(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure tv_CardListMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btn_OKClick(Sender: TObject);
+    procedure btn_SaveArtClick(Sender: TObject);
+    procedure vle_Operation_ParlistSelectCell(Sender: TObject; ACol,
+      ARow: Integer; var CanSelect: Boolean);
+  private
+    { Private declarations }
+    FactArtData: TFactArtDtlInfo;
+    {* 实际工艺类对象}
+    SelectStepNO: integer;
+    {* 当前步骤}
+    
+    procedure RefreshFinishCardList;
+    {* }
+    procedure ArtAfterEdit(Sender: TObject);
+    {* 当工艺被编辑后,见FormCreate事件中:StdArtData.OnAfterEdit:=ArtAfterEdit;}
+    procedure ArtBeforeSave(Sender: TObject);
+    {* 工艺保存之前工艺类调用函数,见FormCreate事件中:StdArtData.OnBeforeSave:=ArtBeforeSave;}
+    procedure ArtAfterSave(Sender: TObject);
+    {* 当工艺保存成功后,见FormCreate事件中:StdArtData.OnAfterSave:=ArtAfterSave;}
+  public
+    { Public declarations }
+  end;
+
+var
+  OperationAddrForm: TOperationAddrForm;
+
+implementation
+
+uses uLogin, CommCtrl, StrUtils, uFNMResource, uGlobal;
+
+{$R *.dfm}
+
+const
+  {$EXTERNALSYM TVM_GETITEMSTATE}
+  TVM_GETITEMSTATE = TV_FIRST + 39;
+
+function TreeView_GetCheckState(hwndTV: HWND; hitem: HTreeItem): Integer;
+begin
+  //Checked 1 Unchecked 0 No Check Box Image -1
+  Result := (SendMessage(hwndTV, TVM_GETITEMSTATE, Longint(hitem), TVIS_STATEIMAGEMASK) shr 12) - 1 ;
+end;
+
+procedure TreeView_SetCheckState(hwndTV: HWND; hitem: HTreeItem; Checked: Boolean);
+var
+  Item: TTVItem;
+begin
+  Item.hItem :=hitem;
+  Item.mask := TVIF_STATE;
+  Item.statemask := TVIS_STATEIMAGEMASK;
+  Item.State := ((Integer(Checked) and 1) + 1) shl 12;
+  TreeView_SetItem(hwndTV, Item);
+end;
+
+procedure TOperationAddrForm.RefreshFinishCardList;
+begin
+  //刷新卡号列表。
+  if cxbe_GFKeyValue.Text = '' then
+    exit;
+
+  FactArtData.CloseArt;
+  btn_SaveArt.Enabled:=false;
+  vle_Operation_Parlist.Strings.Clear;
+  'FillOnLineCardList(cxbe_GFKeyValue.Text, Login.CurrentDepartment, tv_CardList.Items);
+  FillOnLineCardList(cxbe_GFKeyValue.Text,'GI', tv_CardList.Items);
+end;
+
+procedure TOperationAddrForm.ArtAfterEdit(Sender: TObject);
+begin
+//工艺被编辑事件
+  btn_SaveArt.Enabled:=(Sender as TFactArtDtlInfo).Modify;
+end;
+
+procedure TOperationAddrForm.ArtBeforeSave(Sender: TObject);
+var
+  i: Integer;
+  SelectCardList: String;
+begin
+  SelectCardList:='';
+  with tv_CardList do
+  for i := 0 to Items.Count - 1 do
+    if TreeView_GetCheckState(Handle, Items.Item[i].ItemId) = 1 then
+      SelectCardList:=SelectCardList + Items.Item[i].Text + ',';
+      
+  with Sender as TFactArtDtlInfo do
+    CardList:=SelectCardList;
+end;
+
+procedure TOperationAddrForm.ArtAfterSave(Sender: TObject);
+begin
+//工艺被编辑事件
+  btn_SaveArt.Enabled:=false;
+end;
+
+procedure TOperationAddrForm.FormCreate(Sender: TObject);
+var
+  Style: Integer;
+begin
+  btn_SaveArt.Enabled:=false;
+  cxbe_GFKeyValue.Properties.Buttons.Items[0].Glyph.LoadFromResourceName(HInstance, RES_QUERYSMALL);
+  //初始化变量
+  SelectStepNO:=-1;
+  //TreeView的双击事件
+  tv_CardList.OnDblClick:=TGlobal.DblClickATreeview;
+
+  btn_OpenFactArt.Align:=alBottom;
+  pnl_Only2.Align:=alClient;
+  //设置CheckBox
+  Style := GetWindowLong(tv_CardList.Handle, GWL_STYLE);
+  Style := Style or TVS_CHECKBOXES;
+  SetWindowLong(tv_CardList.Handle, GWL_STYLE, Style);
+  //构造实际工艺类
+  FactArtData:=TFactArtDtlInfo.Create(Self);
+  FactArtData.OnAfterEdit:=ArtAfterEdit;
+  FactArtData.OnAfterSave:=ArtAfterSave;
+  FactArtData.OnBeforeSave:=ArtBeforeSave;
+end;
+
+procedure TOperationAddrForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action:=caFree;
+end;
+
+procedure TOperationAddrForm.cxbe_GFKeyValuePropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  RefreshFinishCardList;
+end;
+
+procedure TOperationAddrForm.btn_OpenFactArtClick(Sender: TObject);
+var
+  i: Integer;
+  SubStrLen: Integer;
+  CheckedNode: TTreeNode;
+  SelectCardList: String;
+begin
+  //取工艺代号和加工步骤
+  CheckedNode:=nil;
+  with tv_CardList do
+  begin
+    for i := 0 to Items.Count - 1 do
+    begin
+      if (Items.Item[i].Level = 1) and (TreeView_GetCheckState(Handle, Items.Item[i].ItemId) = 1) then
+        CheckedNode:=Items.Item[i].Parent;
+    end;
+    if CheckedNode = nil then exit;
+  end;
+
+  SubStrLen:=pos('/', CheckedNode.Text);
+  FactArtData.FACT_Art_ID:=StrToInt(LeftStr(CheckedNode.Text, SubStrLen - 1));
+  //这里为什么减1?????
+  SelectStepNO:=StrToInt(MidStr(CheckedNode.Text, SubStrLen + 1, Length(CheckedNode.Text) - SubStrLen));// - 1;
+
+  //取选择的卡号
+  SelectCardList:='';
+  with tv_CardList do
+  for i := 0 to Items.Count - 1 do
+    if TreeView_GetCheckState(Handle, Items.Item[i].ItemId) = 1 then
+      SelectCardList:=SelectCardList + Items.Item[i].Text + ',';
+
+  //打开工艺
+  FactArtData.GetJobTraceDtlInfo(SelectCardList, SelectStepNO);
+  FactArtData.OpenFNArt;
+
+  FactArtData.FillAItemToAListControls('加工地点', Vle_Operation_Parlist);
+
+  tv_CardList.Enabled:=false;
+end;
+
+procedure TOperationAddrForm.vle_Operation_ParlistKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Sender = Vle_Operation_Parlist then
+  with Sender as TValueListEditor do
+  case Key of
+    VK_RETURN:
+      SendMessage(Vle_Operation_Parlist.Handle, WM_KEYDOWN, VK_DOWN, 0);
+  end;
+end;
+
+procedure TOperationAddrForm.vle_Operation_ParlistValidate(Sender: TObject;
+  ACol, ARow: Integer; const KeyName, KeyValue: String);
+begin
+  //当用户修改了值
+  with FactArtData, Vle_Operation_Parlist.Strings do
+  if Active then
+    SetAOperateParameterValue(integer(Objects[ARow - 1]), Trim(KeyName), Trim(KeyValue));
+end;
+
+procedure TOperationAddrForm.KeyDownAControl(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  i: Integer;
+begin
+  //品名编辑框
+  if Sender = cxbe_GFKeyValue then
+  case Key of
+    VK_RETURN: cxbe_GFKeyValue.Properties.OnButtonClick(cxbe_GFKeyValue, 0);
+  end;
+
+  //卡号树 KeyDown
+  if Sender = tv_CardList then
+  case Key of
+    VK_RETURN: btn_OpenFactArt.Click;
+    VK_SPACE:
+    begin
+      with tv_CardList do
+      begin
+        if (Selected = nil) or (Selected.Level = 0)then exit;
+
+        if TreeView_GetCheckState(Handle, Selected.ItemId) = 1 then
+        begin
+          for i := 0 to Items.Count - 1 do
+          begin
+            if (Items.Item[i].Level = 1) and (Items.Item[i].Parent <> Selected.Parent) then
+              TreeView_SetCheckState(Handle, Items.Item[i].ItemId, False);
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TOperationAddrForm.tv_CardListMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  i: Integer;
+  DownTreeNode: TTreeNode;
+begin
+  with Sender as TTreeView do
+  if htOnStateIcon in GetHitTestInfoAt(X, Y) then
+  begin
+    DownTreeNode:=GetNodeAt(X, Y);
+    if TreeView_GetCheckState(Handle, DownTreeNode.ItemId) = 1 then
+    begin
+      for i := 0 to Items.Count - 1 do
+      begin
+        if (Items.Item[i].Level = 1) and (Items.Item[i].Parent <> DownTreeNode.Parent) then
+          TreeView_SetCheckState(Handle,Items.Item[i].ItemId, False);
+      end;
+    end;
+  end;
+end;
+
+procedure TOperationAddrForm.btn_OKClick(Sender: TObject);
+begin
+  close
+end;
+
+procedure TOperationAddrForm.btn_SaveArtClick(Sender: TObject);
+begin
+  cxbe_GFKeyValue.SetFocus;
+  FactArtData.SaveArtToDataBase;
+end;
+
+procedure TOperationAddrForm.vle_Operation_ParlistSelectCell(
+  Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+begin
+  if Vle_Operation_Parlist.Strings.Count = 0 then Exit;
+
+  if Integer(vle_Operation_Parlist.Strings.Objects[ARow - 1]) < SelectStepNO then
+    vle_Operation_Parlist.Options:=vle_Operation_Parlist.Options - [goEditing]
+  else
+    vle_Operation_Parlist.Options:=vle_Operation_Parlist.Options + [goEditing]
+end;
+
+end.

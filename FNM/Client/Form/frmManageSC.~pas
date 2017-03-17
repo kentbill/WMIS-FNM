@@ -1,0 +1,371 @@
+unit frmManageSC;
+{******************************************************************************}
+{                                                                              }
+{       软件名称 FNM CLIENT MODEL                                              }
+{       版权所有 (C) 2004-2005 ESQUEL GROUP GET/IT                             }
+{       单元名称 frmSendInfoCheck.pas                                          }
+{       创建日期 2004-8-26 16:20:05                                            }
+{       创建人员 zhangjy                                                       }
+{       修改人员                                                               }
+{       修改日期                                                               }
+{       修改原因                                                               }
+{       对应用例                                                               }
+{       字段描述                                                               }
+{       相关数据库表                                                           }
+{            读: FNMDB..fnJobTraceHdr表所有字段                                }
+{            写: FNMDB..fnJobTraceHdr表字段Art_Check及Art_Check_Time           }
+{       调用重要函数/SQL对象说明                                               }
+{       功能描述 送布前工艺CHECK                                               }
+{                                                                              }
+{******************************************************************************}
+
+
+interface
+
+uses
+  uFNMResource, Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms,Dialogs, frmBase, StdCtrls, ExtCtrls, OleCtrls, Buttons,
+  DB, DBClient, ComCtrls, StrUtils, GFCADLib_TLB, cxStyles, cxCustomData,
+  cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData,
+  cxGridLevel, cxClasses, cxControls, cxGridCustomView,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
+  cxSplitter, CheckLst, Math;
+
+type
+  TManageSCForm = class(TBaseForm)
+    cdsSendInfo: TClientDataSet;
+    dsSendInfo: TDataSource;
+    cxspl1: TcxSplitter;
+    pnlLeft: TPanel;
+    pnlCard: TPanel;
+    pnl2: TPanel;
+    btnAdd: TSpeedButton;
+    btnUp: TSpeedButton;
+    btnCancel: TSpeedButton;
+    btnDown: TSpeedButton;
+    cxSplitter1: TcxSplitter;
+    cxdbgUnSelect: TcxGrid;
+    cxdbgtvUnSelect: TcxGridDBTableView;
+    cxGridlUnSelect: TcxGridLevel;
+    cdsUnSelect: TClientDataSet;
+    dsUnSelect: TDataSource;
+    cdsSelect: TClientDataSet;
+    dsSelect: TDataSource;
+    cxdbgSelect: TcxGrid;
+    cxdbgtvSelect: TcxGridDBTableView;
+    cxGridlSelect: TcxGridLevel;
+    lstFNCard: TListBox;
+    cxgridSendInfo: TcxGrid;
+    cxgridtvSendInfo: TcxGridDBTableView;
+    cxGridlcxgrid2Level1: TcxGridLevel;
+    pnlTop: TPanel;
+    lblContractNO: TLabel;
+    btnRefresh: TSpeedButton;
+    btnSave: TSpeedButton;
+    btnClose: TSpeedButton;
+    cbbContractNO: TComboBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure cdsUnSelectFilterRecord(DataSet: TDataSet;
+      var Accept: Boolean);
+    procedure btnAddClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnDownClick(Sender: TObject);
+    procedure btnUpClick(Sender: TObject);
+    procedure cxdbgtvUnSelectKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cxdbgtvSelectKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cdsSelectFilterRecord(DataSet: TDataSet;
+      var Accept: Boolean);
+    procedure cbbContractNOSelect(Sender: TObject);
+  private
+    { Private declarations }
+    sContract_NO :string;
+    procedure Initialize;
+    procedure Add;
+    procedure Cancel;
+    procedure GetSCInfo;
+    procedure GetData;
+    procedure SaveSCInfo;
+    procedure SaveData;
+  public
+    { Public declarations }
+{* -----------------------------------------------------------------------------
+   过程名称 PublicQuery ;PublicExport; PublicSave
+   创建人员 zhangjy
+   创建日期 2004-8-31 15:41:59
+   参数列表 None
+   返回值   None
+   功能描述 响应TOOLBAR相应的事件
+   处理流程
+   参考文档
+
+   附加说明
+-------------------------------------------------------------------------------}
+    procedure PublicQuery; override;
+    procedure PublicExport; override;
+    procedure PublicSave; override;
+  end;
+var
+  ManageSCForm: TManageSCForm;
+
+implementation
+
+uses ServerDllPub, uGlobal, uShowMessage, uLogin, uGridDecorator,
+  uAppOption,uDictionary,uCADInfo;
+
+{$R *.dfm}
+
+procedure TManageSCForm.PublicQuery;
+begin
+  GetData;
+end;
+
+procedure TManageSCForm.PublicExport;
+begin
+  TGlobal.SaveDataToFile(cdsSendInfo, sftXLS)
+end;
+
+procedure TManageSCForm.PublicSave;
+begin
+  SaveData;
+end;
+procedure TManageSCForm.Initialize;
+begin
+  btnRefresh.Glyph.LoadFromResourceName(HInstance, RES_REFRESH);
+  btnAdd.Glyph.LoadFromResourceName(HInstance, RES_DOWN);
+  btnDown.Glyph.LoadFromResourceName(HInstance, RES_DOWNALL);
+  btnCancel.Glyph.LoadFromResourceName(HInstance, RES_UP);
+  btnUp.Glyph.LoadFromResourceName(HInstance, RES_UPALL);
+  btnSave.Glyph.LoadFromResourceName(HInstance, RES_SAVE);
+  btnClose.Glyph.LoadFromResourceName(HInstance, RES_EXIT);
+  lstFNCard.Items.Clear;
+  cxdbgtvSelect.OnDblClick := TGlobal.DblClickAWinControl;
+  cxdbgtvUnSelect.OnDblClick := TGlobal.DblClickAWinControl;
+  cbbContractNO.Items.Text := Dictionary.GetItemList('外发合同号',Login.CurrentDepartment,'SC');
+end;
+
+procedure TManageSCForm.GetSCInfo;
+var vData: OleVariant;
+    sCondition,sErrorMsg: WideString;
+begin
+  try
+    ShowMsg('正在获取数据稍等！', crHourGlass);
+    if sContract_NO='' then Exit;
+   sCondition := QuotedStr(sContract_NO)+','+QuotedStr(login.CurrentDepartment);
+   FNMServerObj.GetQueryData(vData,'GetSCInfo',sCondition,sErrorMsg);
+    if sErrorMsg <> '' then
+    begin
+      TMsgDialog.ShowMsgDialog(sErrorMsg,mtError);
+      Exit;
+    end;
+    cdsUnSelect.Data := vData[0];
+    cdsSelect.Data := vData[0];
+    cdsSendInfo.Data := vData[1];
+    lstFNCard.Items.Clear;
+    cdsUnSelect.Filtered := True;
+    cdsSelect.Filtered := True;
+    //填充cxGrid
+    GridDecorator.BindCxViewWithDataSource(cxdbgtvSelect, dsSelect,True);
+    GridDecorator.AddFooter(cxdbgtvSelect,['FN_Card','Quantity'],[skCount,skSum]);
+    GridDecorator.BindCxViewWithDataSource(cxdbgtvUnSelect, dsUnSelect);
+    GridDecorator.AddFooter(cxdbgtvUnSelect,['FN_Card','Quantity'],[skCount,skSum]);
+    GridDecorator.BindCxViewWithDataSource(cxgridtvSendInfo, dsSendInfo);
+  finally
+    ShowMsg('', crDefault);
+  end;
+end;
+
+procedure TManageSCForm.GetData;
+begin
+  GetSCInfo;
+end;
+
+procedure TManageSCForm.SaveSCInfo;
+var
+  sCondition,sFNCardStr, sErrorMsg: WideString;
+  i: integer;
+begin
+  try
+    ShowMsg('正在保存数据稍等！', crHourGlass);
+    if lstFNCard.Items.Count = 0 then Exit;
+   //变量赋值及保存卡号记录
+    sFNCardStr := StringReplace(lstFNCard.Items.Text,#13#10,',',[rfReplaceAll]);
+    sCondition := QuotedStr(sContract_NO)+','+QuotedStr(sFNCardStr)+','+
+              QuotedStr(Login.CurrentDepartment)+','+QuotedStr(Login.LoginName);
+    FNMServerObj.SaveDataBySQL('SaveSCInfo',sCondition,sErrorMsg);
+    if sErrorMsg <> '' then
+    begin
+      TMsgDialog.ShowMsgDialog(sErrorMsg, mtError);
+      Exit;
+    end;
+    for i := 0 to lstFNCard.Items.Count -1 do
+    begin
+      cdsUnSelect.Filtered := False;
+      while cdsUnSelect.Locate('FN_Card',lstFNCard.Items[i],[]) do
+        cdsUnSelect.Delete;
+      cdsUnSelect.Filtered := True;
+      cdsSelect.Filtered := False;
+      while cdsSelect.Locate('FN_Card',lstFNCard.Items[i],[]) do
+        cdsSelect.Delete;
+      cdsSelect.Filtered := True;
+    end;
+    lstFNCard.Items.Clear;
+    cbbContractNO.Items.Delete(cbbContractNO.Items.IndexOf(sContract_NO));
+    cbbContractNO.ItemIndex :=-1;
+    TMsgDialog.ShowMsgDialog('保存数据成功', mtInformation);
+  finally
+    ShowMsg('', crDefault);
+  end;
+end;
+
+procedure TManageSCForm.SaveData;
+begin
+  SaveSCInfo;
+end;
+
+procedure TManageSCForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  Action := caFree;
+end;
+
+procedure TManageSCForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  ManageSCForm := nil;
+end;
+
+procedure TManageSCForm.btnRefreshClick(Sender: TObject);
+begin
+  inherited;
+  cbbContractNO.Items.Text := Dictionary.GetItemList('外发合同号',Login.CurrentDepartment,'SC');
+end;
+
+procedure TManageSCForm.btnSaveClick(Sender: TObject);
+begin
+  inherited;
+  SaveData;
+end;
+
+procedure TManageSCForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  Initialize;
+end;
+
+procedure TManageSCForm.btnCloseClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TManageSCForm.Add;
+var i: Integer;
+    sFN_Card: string;
+begin
+  if (not cdsUnSelect.Active) or (cdsUnSelect.IsEmpty) then Exit;
+  for i :=cxdbgtvUnSelect.Controller.SelectedRowCount - 1 downto 0 do
+  begin
+    with cxdbgtvUnSelect do
+      sFN_Card := Controller.SelectedRows[i].Values[GetColumnByFieldName('FN_Card').Index];
+    lstFNCard.Items.Add(sFN_Card);
+  end;
+  cdsUnSelect.Filtered := False;
+  cdsUnSelect.Filtered := True;
+  cdsSelect.Filtered := False;
+  cdsSelect.Filtered := True;
+end;
+
+procedure TManageSCForm.Cancel;
+var i,Index: Integer;
+    sFN_Card: string;
+begin
+  if (not cdsSelect.Active) or (cdsSelect.IsEmpty) then Exit;
+  for i :=cxdbgtvSelect.Controller.SelectedRowCount - 1 downto 0 do
+  begin
+    with cxdbgtvSelect do
+      sFN_Card := Controller.SelectedRows[i].Values[GetColumnByFieldName('FN_Card').Index];
+    Index := lstFNCard.Items.IndexOf(sFN_Card);
+    if Index <> -1 then
+      lstFNCard.Items.Delete(Index);
+  end;
+  cdsUnSelect.Filtered := False;
+  cdsUnSelect.Filtered := True;
+  cdsSelect.Filtered := False;
+  cdsSelect.Filtered := True;
+end;
+
+procedure TManageSCForm.cdsUnSelectFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  inherited;
+  Accept := Pos(DataSet.FieldByName('FN_Card').AsString,lstFNCard.Items.Text) = 0;
+end;
+
+procedure TManageSCForm.cdsSelectFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  inherited;
+  Accept := Pos(DataSet.FieldByName('FN_Card').AsString,lstFNCard.Items.Text) > 0;
+end;
+
+procedure TManageSCForm.btnAddClick(Sender: TObject);
+begin
+  inherited;
+  Add;
+end;
+
+procedure TManageSCForm.btnCancelClick(Sender: TObject);
+begin
+  inherited;
+  Cancel;
+end;
+
+procedure TManageSCForm.btnDownClick(Sender: TObject);
+begin
+  inherited;
+  cxdbgtvUnSelect.DataController.SelectAll;
+  Add;
+end;
+
+procedure TManageSCForm.btnUpClick(Sender: TObject);
+begin
+  inherited;
+  cxdbgtvSelect.DataController.SelectAll;
+  Cancel;
+end;
+
+procedure TManageSCForm.cxdbgtvUnSelectKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+   if key = vk_Return then
+    Add;
+end;
+
+procedure TManageSCForm.cxdbgtvSelectKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if key = vk_Return then
+    Cancel;
+end;
+
+procedure TManageSCForm.cbbContractNOSelect(Sender: TObject);
+begin
+  inherited;
+  sContract_NO := cbbContractNO.Text;
+  if cdsSendInfo.Active then cdsSendInfo.EmptyDataSet;
+  if cdsUnSelect.Active then cdsUnSelect.EmptyDataSet;
+  if cdsSelect.Active then cdsSelect.EmptyDataSet;
+  GetData;
+end;
+
+end.

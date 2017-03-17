@@ -1,0 +1,100 @@
+object AccidentTimeSelectFrom: TAccidentTimeSelectFrom
+  Left = 519
+  Top = 346
+  BorderStyle = bsNone
+  Caption = #26102#38388#36873#25321
+  ClientHeight = 98
+  ClientWidth = 338
+  Color = clAppWorkSpace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl2: TLabel
+    Left = 16
+    Top = 19
+    Width = 51
+    Height = 13
+    Caption = #24320#22987#26102#38388':'
+  end
+  object Label1: TLabel
+    Left = 15
+    Top = 42
+    Width = 51
+    Height = 13
+    Caption = #32467#26463#26102#38388':'
+  end
+  object dtpBeginTime: TDateTimePicker
+    Left = 196
+    Top = 13
+    Width = 101
+    Height = 20
+    CalAlignment = dtaLeft
+    Date = 38470.5432952315
+    Time = 38470.5432952315
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkTime
+    ParseInput = False
+    TabOrder = 0
+  end
+  object dtpBeginDate: TDateTimePicker
+    Left = 78
+    Top = 13
+    Width = 117
+    Height = 20
+    CalAlignment = dtaLeft
+    Date = 38470.5432952315
+    Time = 38470.5432952315
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkDate
+    ParseInput = False
+    TabOrder = 1
+  end
+  object dtpEndDate: TDateTimePicker
+    Left = 78
+    Top = 36
+    Width = 116
+    Height = 20
+    CalAlignment = dtaLeft
+    Date = 38470.5432952315
+    Time = 38470.5432952315
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkDate
+    ParseInput = False
+    TabOrder = 2
+  end
+  object dtpEndTime: TDateTimePicker
+    Left = 196
+    Top = 36
+    Width = 101
+    Height = 20
+    CalAlignment = dtaLeft
+    Date = 38470.5432952315
+    Time = 38470.5432952315
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkTime
+    ParseInput = False
+    TabOrder = 3
+  end
+  object btnSave: TButton
+    Left = 131
+    Top = 65
+    Width = 75
+    Height = 25
+    Caption = #30830#35748'(&S)'
+    Default = True
+    ModalResult = 1
+    TabOrder = 4
+    OnClick = btnSaveClick
+  end
+end

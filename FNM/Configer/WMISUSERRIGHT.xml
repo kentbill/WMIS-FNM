@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="GB2312"?>
+<WMIS>
+ <Connection ServerName="GEW-MIS01" DatabaseName="systemPanel" UserId="USERRIGHT" Password="getuserright" TimeOut="5000" />
+</WMIS>

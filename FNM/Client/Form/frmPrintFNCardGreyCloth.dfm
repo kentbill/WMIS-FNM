@@ -1,0 +1,670 @@
+object PrintFNCardGreyClothForm: TPrintFNCardGreyClothForm
+  Left = 327
+  Top = 137
+  Width = 970
+  Height = 473
+  Caption = #24453#25171#21345#22383#24067#23567#26679#20449#24687
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = #23435#20307
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDefault
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 12
+  object grpTop: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 962
+    Height = 209
+    Align = alTop
+    Caption = #24453#25171#21345#23567#26679#20449#24687
+    TabOrder = 0
+    object dbgrdWait: TDBGrid
+      Left = 2
+      Top = 14
+      Width = 958
+      Height = 193
+      Align = alClient
+      DataSource = dsWait
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = #23435#20307
+      TitleFont.Style = []
+      OnDblClick = dbgrdWaitDblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Title.Caption = #24207#21495
+          Width = 56
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Job_NO'
+          Title.Caption = #25490#21333#21495
+          Width = 116
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Machine_ID'
+          Title.Caption = #32455#26426#21488
+          Width = 74
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GF_ID'
+          Title.Caption = #21697#21517#21495
+          Width = 75
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GF_NO'
+          Title.Caption = #21697#21517
+          Width = 125
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Fabric_NO'
+          Title.Caption = #24067#21495
+          Width = 89
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Code'
+          Title.Caption = #24037#24207#20195#30721
+          Width = 127
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Name'
+          Title.Caption = #21152#24037#24037#24207
+          Width = 161
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Status'
+          Title.Caption = #29366#24577
+          Width = 51
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Width'
+          Title.Caption = #22383#24067#38376#24133
+          Visible = True
+        end>
+    end
+  end
+  object pnlTop: TPanel
+    Left = 0
+    Top = 209
+    Width = 962
+    Height = 30
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 1
+    object btnMoveDown: TBitBtn
+      Left = 21
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #28155#21152
+      TabOrder = 0
+      OnClick = btnMoveDownClick
+      Glyph.Data = {
+        DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+        0400000000006800000000000000000000001000000010000000000000000000
+        BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        7000777777777777700077777707777770007777706077777000777706660777
+        7000777066666077700077066666660770007000066600007000777706660777
+        7000777706660777700077770666077770007777000007777000777777777777
+        7000}
+    end
+    object btnMoveDownAll: TBitBtn
+      Left = 98
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #20840#37096
+      TabOrder = 1
+      OnClick = btnMoveDownAllClick
+      Glyph.Data = {
+        DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+        04000000000068000000C40E0000C40E00001000000000000000000000000000
+        BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777077777
+        7000777770607777700077770666077770007770660660777000770660606607
+        7000700006660000700077706666607770007706666666077000700006660000
+        7000777706660777700077770666077770007777066607777000777700000777
+        7000}
+    end
+    object btnMoveUp: TBitBtn
+      Left = 175
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #25764#38144
+      TabOrder = 2
+      OnClick = btnMoveUpClick
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        1800000000000003000000000000000000000000000000000000FF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FF000000000000000000000000000000FF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF000000BDBD00BD
+        BD00BDBD00000000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FF000000BDBD00BDBD00BDBD00000000FF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF000000BDBD00BD
+        BD00BDBD00000000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        000000000000000000000000BDBD00BDBD00BDBD000000000000000000000000
+        00FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF000000BDBD00BDBD00BDBD00BD
+        BD00BDBD00BDBD00BDBD00000000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FF000000BDBD00BDBD00BDBD00BDBD00BDBD00000000FF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF000000BDBD00BD
+        BD00BDBD00000000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FF000000BDBD00000000FF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00
+        0000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+    end
+    object btnMoveUpAll: TBitBtn
+      Left = 252
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #20840#37096
+      TabOrder = 3
+      OnClick = btnMoveUpAllClick
+      Glyph.Data = {
+        DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+        04000000000068000000C40E0000C40E00001000000000000000000000000000
+        BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777700000777
+        7000777706660777700077770666077770007777066607777000700006660000
+        7000770666666607700077706666607770007000066600007000770660606607
+        7000777066066077700077770666077770007777706077777000777777077777
+        7000}
+    end
+  end
+  object grpClient: TGroupBox
+    Left = 0
+    Top = 247
+    Width = 962
+    Height = 169
+    Align = alClient
+    Caption = #25171#21345#23567#26679#20449#24687
+    TabOrder = 2
+    object dbgrdPrint: TDBGrid
+      Left = 2
+      Top = 14
+      Width = 958
+      Height = 153
+      Align = alClient
+      DataSource = dsPrint
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = #23435#20307
+      TitleFont.Style = []
+      OnDblClick = dbgrdPrintDblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Title.Caption = #24207#21495
+          Width = 56
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Job_NO'
+          Title.Caption = #25490#21333#21495
+          Width = 116
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Machine_ID'
+          Title.Caption = #32455#26426#21488
+          Width = 86
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GF_ID'
+          Title.Caption = #21697#21517#21495
+          Width = 89
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GF_NO'
+          Title.Caption = #21697#21517
+          Width = 105
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Fabric_NO'
+          Title.Caption = #24067#21495
+          Width = 89
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Code'
+          Title.Caption = #24037#24207#20195#30721
+          Width = 102
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Production_Name'
+          Title.Caption = #21152#24037#24037#24207
+          Width = 161
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Status'
+          Title.Caption = #29366#24577
+          Width = 51
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Width'
+          Title.Caption = #22383#24067#38376#24133
+          Visible = True
+        end>
+    end
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Top = 416
+    Width = 962
+    Height = 30
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 4
+    object pnlRight: TPanel
+      Left = 525
+      Top = 0
+      Width = 437
+      Height = 30
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 0
+      object chkIsPreview: TCheckBox
+        Left = 176
+        Top = 8
+        Width = 73
+        Height = 17
+        Caption = #25171#21360#39044#35272
+        TabOrder = 2
+      end
+      object btnPrint: TBitBtn
+        Left = 248
+        Top = 3
+        Width = 75
+        Height = 25
+        Caption = #25171#21360
+        TabOrder = 0
+        OnClick = btnPrintClick
+        Glyph.Data = {
+          26050000424D26050000000000003604000028000000100000000F0000000100
+          080000000000F0000000CE0E0000C40E00000001000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000C0DCC000F0C8
+          A400000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000FFFFFFFF0007070707
+          0707070707000700FFFF000000000000000000000000000700FF000707070707
+          07FBFBFB0707000000FF000707070707071010100707000700FF000000000000
+          0000000000000007070000070707070707070707070007000700FF0000000000
+          00000000000700070000FFFF00FFFFFFFFFFFFFFFF0007000700FFFFFF00FF00
+          00000000FF00000000FFFFFFFF00FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF00FF
+          0000000000FF00FFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF00
+          0000000000000000FFFF}
+      end
+      object btnExit: TBitBtn
+        Left = 352
+        Top = 3
+        Width = 75
+        Height = 25
+        Caption = #36864#20986
+        TabOrder = 1
+        OnClick = btnExitClick
+        Glyph.Data = {
+          42020000424D4202000000000000420000002800000010000000100000000100
+          1000030000000002000000000000000000000000000000000000007C0000E003
+          00001F0000001F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C1F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C1F7C1F7C1F7C000000001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C1F7C1F7C0000004200001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C1F7C00000042004200001F7C1F7C1F7C1F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C0000000000420042004200000000000000000000000000000000
+          1F7C1F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C000000420042000000001F7C1F7C00001F7C1F7C1F7C1F7C
+          10001F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C1F7C1000
+          10001F7C1F7C1F7C000000420042004200001F7C1F7C00001F7C1F7C10001000
+          1000100010001F7C000000420042004200001F7C1F7C00001F7C100010001000
+          1000100010001F7C000000420042004200001F7C1F7C00001F7C1F7C10001000
+          1000100010001F7C00000042004200001F7C1F7C1F7C00001F7C1F7C1F7C1000
+          10001F7C1F7C1F7C0000004200001F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C
+          10001F7C1F7C1F7C000000001F7C1F7C1F7C1F7C1F7C00001F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C1F7C000000000000000000000000000000001F7C1F7C1F7C1F7C
+          1F7C1F7C1F7C}
+      end
+    end
+    object btnRefresh: TBitBtn
+      Left = 15
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #21047#26032'(&R)'
+      TabOrder = 1
+      OnClick = btnRefreshClick
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00FF00
+        FF00000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000000000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000840000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000084000000840000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF000084000000840000008400000084
+        000000840000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF000084000000840000FFFF
+        FF00FFFFFF0000840000FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000840000FFFF
+        FF00FFFFFF0000840000FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF0000840000FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF0000840000FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF0000840000FFFFFF00FFFFFF0000840000FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF0000840000FFFFFF00FFFFFF00008400000084
+        0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF000084000000840000008400000084
+        000000840000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00008400000084
+        0000FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000840000FFFF
+        FF00FFFFFF0000000000000000000000000000000000FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF0000000000FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00
+        FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00}
+    end
+    object btnQuery: TBitBtn
+      Left = 96
+      Top = 3
+      Width = 75
+      Height = 25
+      Caption = #26597#35810
+      TabOrder = 2
+      OnClick = btnQueryClick
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        0400000000007800000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+        FFFF00000FFFFF00000F0F000FFFFF0F000F0F000FFFFF0F000F0000000F0000
+        000F00F000000F00000F00F000F00F00000F00F000F00F00000FF00000000000
+        00FFFF0F000F0F000FFFFF00000F00000FFFFFF000FFF000FFFFFFF0F0FFF0F0
+        FFFFFFF000FFF000FFFFFFFFFFFFFFFFFFFF}
+    end
+  end
+  object cxSplitter1: TcxSplitter
+    Left = 0
+    Top = 239
+    Width = 962
+    Height = 8
+    HotZoneClassName = 'TcxMediaPlayer8Style'
+    AlignSplitter = salTop
+    Control = pnlTop
+  end
+  object cdsQuery: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 104
+    Top = 376
+  end
+  object dsWait: TDataSource
+    DataSet = cdsWait
+    Left = 344
+    Top = 144
+  end
+  object cdsPrint: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 304
+    Top = 312
+    object cdsPrintID: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'ID'
+    end
+    object cdsPrintJob_NO: TStringField
+      FieldName = 'Job_NO'
+    end
+    object cdsPrintMachine_ID: TStringField
+      FieldName = 'Machine_ID'
+    end
+    object cdsPrintGF_ID: TIntegerField
+      FieldName = 'GF_ID'
+    end
+    object cdsPrintGF_NO: TStringField
+      FieldName = 'GF_NO'
+      Size = 50
+    end
+    object cdsPrintFabric_NO: TStringField
+      FieldName = 'Fabric_NO'
+    end
+    object cdsPrintProduction_Code: TStringField
+      FieldName = 'Production_Code'
+      Size = 200
+    end
+    object cdsPrintProduction_Name: TStringField
+      FieldName = 'Production_Name'
+      Size = 200
+    end
+    object cdsPrintStatus: TStringField
+      FieldName = 'Status'
+      Size = 50
+    end
+    object cdsPrintWidth: TBCDField
+      FieldName = 'Width'
+      Size = 6
+    end
+  end
+  object dsPrint: TDataSource
+    DataSet = cdsPrint
+    Left = 336
+    Top = 312
+  end
+  object cdsSource: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 64
+    Top = 376
+  end
+  object msGreyCloth: TMakeSQL
+    Caption = #26597#35810#26465#20214#32534#36753
+    ItemNames = <
+      item
+        ParaCaption = #25490#21333#21495
+        ParaName = 'Job_NO'
+        SelectPoint.Strings = (
+          '='
+          '<>'
+          '>'
+          '<'
+          '>='
+          '<='
+          'like'
+          'is Null'
+          'is Not Null')
+      end
+      item
+        ParaCaption = #21697#21517#21495
+        ParaName = 'GF_ID'
+        SelectPoint.Strings = (
+          '='
+          '<>'
+          '>'
+          '<'
+          '>='
+          '<='
+          'like'
+          'is Null'
+          'is Not Null')
+      end
+      item
+        ParaCaption = #21697#21517
+        ParaName = 'GF_NO'
+        SelectPoint.Strings = (
+          '='
+          '<>'
+          '>'
+          '<'
+          '>='
+          '<='
+          'like'
+          'is Null'
+          'is Not Null')
+      end
+      item
+        ParaCaption = #24067#21495
+        ParaName = 'Fabric_NO'
+        SelectPoint.Strings = (
+          '='
+          '<>'
+          '>'
+          '<'
+          '>='
+          '<='
+          'like'
+          'is Null'
+          'is Not Null')
+      end>
+    Left = 176
+    Top = 416
+  end
+  object cdsWait: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 312
+    Top = 144
+    object StringField1: TStringField
+      FieldKind = fkInternalCalc
+      FieldName = 'ID'
+    end
+    object StringField2: TStringField
+      FieldName = 'Job_NO'
+    end
+    object cdsWaitMachine_ID: TStringField
+      FieldName = 'Machine_ID'
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'GF_ID'
+    end
+    object StringField3: TStringField
+      FieldName = 'GF_NO'
+      Size = 50
+    end
+    object StringField4: TStringField
+      FieldName = 'Fabric_NO'
+    end
+    object StringField5: TStringField
+      FieldName = 'Production_Code'
+      Size = 200
+    end
+    object StringField6: TStringField
+      FieldName = 'Production_Name'
+      Size = 200
+    end
+    object StringField7: TStringField
+      FieldName = 'Status'
+      Size = 50
+    end
+    object cdsWaitWidth: TBCDField
+      FieldName = 'Width'
+      Size = 6
+    end
+  end
+  object cdsPrintPPData: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 656
+    Top = 368
+  end
+  object cdsSave: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 144
+    Top = 376
+  end
+end

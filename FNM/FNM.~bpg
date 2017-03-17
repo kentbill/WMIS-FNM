@@ -1,0 +1,32 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = FNMFacade.dll FNMDAO.dll FTM.exe FNM.exe mainWovefb.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+FNMFacade.dll: Server\FNMFacade.dpr
+  $(DCC)
+
+FNMDAO.dll: Server\FNMDAO.dpr
+  $(DCC)
+
+FTM.exe: Client\FTM.dpr
+  $(DCC)
+
+FNM.exe: Client\FNM.dpr
+  $(DCC)
+
+mainWovefb.exe: ..\..\..\Code\Library_EEL\mainWovefb.dpr
+  $(DCC)
+
+

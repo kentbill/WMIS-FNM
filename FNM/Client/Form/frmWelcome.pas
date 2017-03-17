@@ -1,0 +1,146 @@
+{*******************************************************}
+{                                                       }
+{       软件名称 W.MIS CLIENT MODEL                     }
+{       版权所有 (C) 2003, 2004 Esquel.IT               }
+{       单元名称 frmWellcome.pas                        }
+{       创建日期 2004-8-3 10:58:42                      }
+{       创建人员 wuwj                                   }
+{                                                       }
+{*******************************************************}
+
+unit frmWelcome;   
+{* 欢迎窗体单元 }
+
+interface
+
+uses
+  SysUtils, Windows, Messages, Classes, Graphics, Controls,
+  StdCtrls, ExtCtrls, Forms, DB, ADODB;
+
+type
+  TFNMWelcome = class(TForm)
+    ImageWellcome: TImage;
+    pnlButtom: TPanel;
+    btnCancel: TButton;
+    btnOK: TButton;
+    cmbComPlusServers: TComboBox;
+    lbMessage: TLabel;
+    txt1: TStaticText;
+    procedure FormCreate(Sender: TObject);
+  public
+    procedure ShowProcessMessage(msg: string);
+  private
+    ComServerName:String;
+  end;
+
+function GetComServerName: Boolean;
+
+var
+  FNMWelcome: TFNMWelcome;
+
+implementation
+
+uses
+  frmMain, UAppOption, uLogin, uShowMessage, Dialogs;
+
+{$R *.DFM}
+
+function GetComServerName: Boolean;
+var
+  OptionFile: string;
+label
+  ChoseComServer;
+begin
+  OptionFile:= GetEnvironmentVariable('APPDATA')+'\'+ExtractFileName(Application.ExeName);
+  AppOption.InitiFileName:= ChangeFileExt(OptionFile, '.Config');
+  AppOption.InitiOption;
+  frmMain.lsdXPStyle.SkinFile:= AppOption.SkinFileFullName;
+  frmMain.lsdXPStyle.Active:= AppOption.UseXPStyle;
+
+  ChoseComServer:
+  if GetKeyState(VK_CONTROL) < 0 then
+  begin
+    result := True;
+    Login.ComPlusServer:= '';
+  end
+  else
+  begin
+    FreeAndNil(FNMWelcome);
+    FNMWelcome:= TFNMWelcome.Create(Application);
+    FNMWelcome.ShowModal;
+    result:=FNMWelcome.ModalResult = mrOK;
+    if result then
+      Login.ComPlusServer:=FNMWelcome.cmbComPlusServers.Text;
+  end;
+  
+  //测试服务器是否可用,否则继续让用户选择. 用户取消时Result会为False
+  if result then
+  begin
+    try
+      if FNMWelcome = nil then
+        FNMWelcome:= TFNMWelcome.Create(Application);
+      FNMWelcome.Enabled:=false;
+      FNMWelcome.Show;
+
+      FNMWelcome.ShowProcessMessage('初始化登录对象...');
+      Login.Initialize;
+    except
+      TMsgDialog.ShowMsgDialog('连接服务器出错,请重新输入服务器名称并重试或联系程序员解决', mtWarning);
+      result := False;
+      FNMWelcome.Close;
+    end;
+    if not result then
+      goto ChoseComServer;
+  end;
+end;
+
+procedure TFNMWelcome.ShowProcessMessage(msg: string);
+var
+  BeginTick: DWORD;
+begin
+  BeginTick:=GetTickCount;
+  lbMessage.Caption:=msg;
+  lbMessage.Refresh;
+end;
+
+procedure TFNMWelcome.FormCreate(Sender: TObject);
+ var
+  cfgfilename1,cfgfilename2,cfgfilename3:string;
+  adoqry_ChooseApp:tAdoquery;
+begin
+  try
+    adoqry_ChooseApp:=TADOQuery.Create(Self);
+    cfgfilename1:='\\getnas\MIS\W.MIS\appserverlist.xml';
+    cfgfilename2:='\\ges-mis02\SMIS\appserverlist.xml';
+    with  adoqry_ChooseApp do
+    begin
+      Close;
+      try
+         adoqry_ChooseApp.LoadFromFile(cfgfilename1);
+      except
+         try
+           adoqry_ChooseApp.LoadFromFile(cfgfilename2);
+         except
+           cmbComPlusServers.ItemIndex:=0;
+           self.ComServerName := cmbComPlusServers.Text;
+           Exit;
+         end;
+     end;
+     cmbComPlusServers.Clear;
+     while not eof do
+     begin
+       cmbComPlusServers.Items.Add(fieldbyname('Server_Name').AsString);
+       next;
+     end;
+
+     cmbComPlusServers.Items.Add('GETNT34');
+     cmbComPlusServers.ItemIndex:=cmbComPlusServers.Items.Count-1;
+
+     self.ComServerName := cmbComPlusServers.Text;
+    end;
+  finally
+    adoqry_ChooseApp.Free;
+  end;
+end;
+
+end.
