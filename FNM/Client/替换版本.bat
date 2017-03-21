@@ -26,7 +26,6 @@ echo,test:
 	If !errorLevel!==0 (echo %strv%) Else (echo %%i)
 ))>FNM\Client\FNMAutoTemp.rc
 
-If !errorLevel!==1 goto :end
 
 del FNM\Client\FNMAuto.rc
 ren FNM\Client\FNMAutoTemp.rc FNMAuto.rc
@@ -38,4 +37,3 @@ dcc32 -b "FNM\Client\fnm.dpr"
 
 pause
 
-:end
