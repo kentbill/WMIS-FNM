@@ -1,8 +1,8 @@
 @echo off&SetLocal EnableDelayedExpansion
 
-del FNMAutoTemp.rc
+del FNM\Client\FNMAutoTemp.rc
 
-for /f "skip=1 delims=" %%i in (D:\Work\WMIS\SVN\CODE\FNM\Client\fnmauto.rc) do ( 
+for /f "skip=1 delims=" %%i in (FNM\Client\fnmauto.rc) do ( 
     set str=%%~i 
     goto Next 
 ) 
@@ -24,13 +24,13 @@ set strv=%strf%%stra%
 	If !errorLevel!==0 (echo %strv%) Else (echo %%i)
 ))>FNMAutoTemp.rc
 
-del D:\Work\WMIS\SVN\CODE\FNM\Client\FNMAuto.rc
-ren D:\Work\WMIS\SVN\CODE\FNM\Client\FNMAutoTemp.rc FNMAuto.rc
+del FNM\Client\FNMAuto.rc
+ren FNM\Client\FNMAutoTemp.rc FNMAuto.rc
 
 
-brcc32 "D:\Work\WMIS\SVN\CODE\FNM\Client\fnmauto.rc"
+brcc32 "FNM\Client\fnmauto.rc"
 
-dcc32 -b "D:\Work\WMIS\SVN\CODE\FNM\Client\fnm.dpr"
+dcc32 -b "FNM\Client\fnm.dpr"
 
 pause
 
