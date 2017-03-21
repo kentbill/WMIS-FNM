@@ -24,7 +24,7 @@ echo,test:
 (For /f "delims=" %%i in (FNM\Client\FNMAuto.rc) do (
 	echo %%i| Find /i "FILEVERSION 1,1,">nul
 	If !errorLevel!==0 (echo %strv%) Else (echo %%i)
-))>FNMAutoTemp.rc
+))>FNM\Client\FNMAutoTemp.rc
 
 If !errorLevel!==1 goto :end
 
