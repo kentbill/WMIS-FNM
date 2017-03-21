@@ -1,5 +1,5 @@
 VS_VERSION_INFO VERSIONINFO  
-FILEVERSION 1,1,2,14     
+FILEVERSION 1,1,2,58  
 PRODUCTVERSION 2013,0,0,0  
 FILEOS 0x40004  
 FILETYPE 0x1  
@@ -19,6 +19,7 @@ BEGIN
       VALUE "ProductVersion","1.0.0.0\0"  
     END  
   END  
+  
   BLOCK "VarFileInfo"  
   BEGIN  
     VALUE "Translation", 0x804,1200  
