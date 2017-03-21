@@ -11,7 +11,6 @@ BEGIN
       VALUE "Comments", "\0"  
       VALUE "CompanyName","ESQUEL\0"  
       VALUE "FileDescription", "W.MIS FNM CLIENT\0"  
-      VALUE "FileVersion", "1.1.2.57\0"  
       VALUE "InternalName", "FNM"  
       VALUE "LegalCopyright", "\0"  
       VALUE "LegalTrademarks", ""  
