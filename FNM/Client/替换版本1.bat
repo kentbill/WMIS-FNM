@@ -21,7 +21,7 @@ echo,test:
 
 ::以下代码替换文本内容，假设要处理的文本为1.txt
 
-(For /f "delims=" %%i in (FNMAuto.rc) do (
+(For /f "delims=" %%i in (FNM\Client\FNMAuto.rc) do (
 	echo %%i| Find /i "FILEVERSION 1,1,">nul
 	If !errorLevel!==0 (echo %strv%) Else (echo %%i)
 ))>FNMAutoTemp.rc
