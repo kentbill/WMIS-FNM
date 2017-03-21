@@ -15,7 +15,9 @@ set /a stra+=1
 
 set strv=%strf%%stra%     
 
-::echo,%strv%
+echo,test:
+echo,%strv%
+echo,test:
 
 ::以下代码替换文本内容，假设要处理的文本为1.txt
 
