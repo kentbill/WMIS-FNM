@@ -1,6 +1,6 @@
 @echo off&SetLocal EnableDelayedExpansion
 
-del D:\Work\WMIS\SVN\CODE\FNM\Client\FNMAutoTemp.rc
+del FNMAutoTemp.rc
 
 for /f "skip=1 delims=" %%i in (D:\Work\WMIS\SVN\CODE\FNM\Client\fnmauto.rc) do ( 
     set str=%%~i 
